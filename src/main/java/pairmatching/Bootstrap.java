@@ -14,15 +14,15 @@ import java.util.Objects;
 
 public class Bootstrap {
 
-    private final List<String> backCrews = new ArrayList<>();
-    private final List<String> frontCrews = new ArrayList<>();
+    public static final List<String> backCrews = new ArrayList<>();
+    public static final List<String> frontCrews = new ArrayList<>();
 
-    public void init() {
+    static {
         makeCrewList("backend-crew.md", backCrews);
         makeCrewList("frontend-crew.md", frontCrews);
     }
 
-    private void makeCrewList(String filename, List<String> crewList) {
+    private static void makeCrewList(String filename, List<String> crewList) {
         File file = getCrewFile(filename);
         if (file.exists()) {
             BufferedReader bufferedReader = getBufferedReader(file);
@@ -33,7 +33,7 @@ public class Bootstrap {
         }
     }
 
-    private File getCrewFile(String filename) {
+    private static File getCrewFile(String filename) {
         ClassLoader classLoader = Application.class.getClassLoader();
         URI backendURI = null;
         try {
@@ -44,7 +44,7 @@ public class Bootstrap {
         return new File(backendURI);
     }
 
-    private BufferedReader getBufferedReader(File file) {
+    private static BufferedReader getBufferedReader(File file) {
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -54,7 +54,7 @@ public class Bootstrap {
         return bufferedReader;
     }
 
-    private String readCrew(BufferedReader bufferedReader) {
+    private static String readCrew(BufferedReader bufferedReader) {
         String crew;
         try {
             crew = bufferedReader.readLine();
@@ -62,13 +62,5 @@ public class Bootstrap {
             throw new RuntimeException(e);
         }
         return crew;
-    }
-
-    public List<String> getBackCrews() {
-        return backCrews;
-    }
-
-    public List<String> getFrontCrews() {
-        return frontCrews;
     }
 }
