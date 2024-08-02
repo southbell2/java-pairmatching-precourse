@@ -1,4 +1,4 @@
-package pairmatching;
+package pairmatching.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,19 +11,13 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import pairmatching.Application;
 
-public class Bootstrap {
+public class MakeCrew {
 
-    public static final List<String> backCrews = new ArrayList<>();
-    public static final List<String> frontCrews = new ArrayList<>();
-
-    static {
-        makeCrewList("backend-crew.md", backCrews);
-        makeCrewList("frontend-crew.md", frontCrews);
-    }
-
-    private static void makeCrewList(String filename, List<String> crewList) {
+    public List<String> makeCrewList(String filename) {
         File file = getCrewFile(filename);
+        List<String> crewList = new ArrayList<>();
         if (file.exists()) {
             BufferedReader bufferedReader = getBufferedReader(file);
             String crew;
@@ -31,9 +25,10 @@ public class Bootstrap {
                 crewList.add(crew);
             }
         }
+        return crewList;
     }
 
-    private static File getCrewFile(String filename) {
+    private File getCrewFile(String filename) {
         ClassLoader classLoader = Application.class.getClassLoader();
         URI backendURI = null;
         try {
@@ -44,7 +39,7 @@ public class Bootstrap {
         return new File(backendURI);
     }
 
-    private static BufferedReader getBufferedReader(File file) {
+    private BufferedReader getBufferedReader(File file) {
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -54,7 +49,7 @@ public class Bootstrap {
         return bufferedReader;
     }
 
-    private static String readCrew(BufferedReader bufferedReader) {
+    private String readCrew(BufferedReader bufferedReader) {
         String crew;
         try {
             crew = bufferedReader.readLine();
@@ -63,4 +58,5 @@ public class Bootstrap {
         }
         return crew;
     }
+
 }

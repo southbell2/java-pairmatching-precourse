@@ -1,10 +1,8 @@
-package pairmatching.pairmatching;
+package pairmatching.prompt;
 
-public interface Command {
+public class MatchingPrompt {
 
-    void execute();
-
-    default void showPrompt() {
+    public static void showPrompt() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
             .append("#############################################\n")
@@ -20,17 +18,7 @@ public interface Command {
         System.out.println(stringBuilder);
     }
 
-    class Input {
-
-        protected final String course;
-        protected final String level;
-        protected final String mission;
-
-        public Input(String course, String level, String mission) {
-            this.course = course;
-            this.level = level;
-            this.mission = mission;
-        }
-
+    private MatchingPrompt() {
     }
+
 }

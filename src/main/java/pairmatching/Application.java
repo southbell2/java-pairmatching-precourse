@@ -1,6 +1,6 @@
 package pairmatching;
 
-import pairmatching.pairmatching.MainPrompt;
+import pairmatching.prompt.MainPrompt;
 
 public class Application {
 
